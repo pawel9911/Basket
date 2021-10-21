@@ -1,10 +1,12 @@
 import './App.css';
-import Basket from './componets/Basket';
+import Main from './componets/Main';
 
 function App() {
   return (
     <div className="App">
-      <Basket/>
+      <div className="container">
+        <Main/>
+      </div>
     </div>
   );
 }
