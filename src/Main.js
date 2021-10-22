@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Basket from "./Basket";
+import Basket from "./componets/Basket";
 
 const Main = () =>{
     const [status, setStatus] = useState(false);

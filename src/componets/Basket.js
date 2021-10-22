@@ -3,7 +3,7 @@ import Product from "./Product";
 import Summary from "./Summary";
 import UpSellsProducts from "./UpSellsProducts";
 import listProduct from "../listProduct";
-import '.././App.css';
+import '../scss/App.scss';
 
 const Basket = ({setStatus}) =>{
     const [offer, setOffer] = useState(listProduct.items);

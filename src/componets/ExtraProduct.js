@@ -6,7 +6,7 @@ const ExtraProduct = ({data}) =>{
                 <img src={data.image}/>
             </div>
 
-            <div className="kupa">
+            <div className="up-sell-description">
                 <p>{data.title}</p>
                 <div>
                     <p>€ {data.price}</p>

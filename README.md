@@ -1,6 +1,6 @@
 # Hatimeria
 
-W projekcie wykorzystałem Reacta.js, nie spodziewałem się tyle stylowania więc postawiłem na CSS, teraz wybrał bym SCSS.
+W projekcie wykorzystałem Reacta.js oraz SCSS.
 
 ### Project setup `npm i` 
 
