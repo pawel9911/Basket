@@ -1,6 +1,5 @@
 
 const ExtraProduct = ({data}) =>{
-    console.log(data)
     return(
         <div className="extra-product">
             <div>
@@ -8,9 +7,7 @@ const ExtraProduct = ({data}) =>{
             </div>
 
             <div className="kupa">
-                {/* <div> */}
-                    <p>{data.title}</p>
-                {/* </div> */}
+                <p>{data.title}</p>
                 <div>
                     <p>€ {data.price}</p>
                     <button>Add</button>
@@ -20,4 +17,4 @@ const ExtraProduct = ({data}) =>{
     )
 }
 
-export default ExtraProduct
+export default ExtraProduct;

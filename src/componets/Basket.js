@@ -1,9 +1,9 @@
-import Product from "./Product";
-import '.././App.css';
-import Summary from "./Summary";
 import { useEffect, useState } from "react";
-import listProduct from "../listProduct";
+import Product from "./Product";
+import Summary from "./Summary";
 import UpSellsProducts from "./UpSellsProducts";
+import listProduct from "../listProduct";
+import '.././App.css';
 
 const Basket = ({setStatus}) =>{
     const [offer, setOffer] = useState(listProduct.items);

@@ -3,36 +3,38 @@ import { useState } from "react";
 const Product = ({data, finallPrice, filterBasket, basket}) =>{
     const [qty, setQty] = useState(data.qty);
     const price = data.price.current_price
-    const [sumPriceProduct, setSumPriceProduct] = useState(price*data.qty)
+    const [overallProductPrice, setOverallProductPrice] = useState(price*data.qty)
     
-    const up = () =>{
+    const increaseQty = () =>{
         if(qty <10){
             setQty(p => p+1);
-            setSumPriceProduct(p => p+price)
+            setOverallProductPrice(p => p+price)
             finallPrice(p=> p+price)
         }
     }
-    const down = () =>{
+    
+    const decreaseQty = () =>{
         if(qty >1){
             setQty(p => p-1)
-            setSumPriceProduct(p => p-price)
+            setOverallProductPrice(p => p-price)
             finallPrice(p=> p-price)
         }
     }
-    const handleChange = (e) =>{
+
+    const handleChangeQty = (e) =>{
         const value = Number(e.target.value)
         if((value<=10)&&(value>=1)||(value=='')){
             setQty(value)
-            setSumPriceProduct(value*price)
+            setOverallProductPrice(value*price)
             finallPrice(p=>p+value*price-qty*price)
-            // poprzednia wartość + ilość wpisana przez użytkownika* cena - ilość poprzednia zapisana w state * cena
         }
         else{
-            alert("Wybierz ilość od 1 do 10")
+            alert("Please select value from 1 to 10")
         }
     }
+
     const removeProduct = () =>{
-        finallPrice(p=> p-sumPriceProduct)
+        finallPrice(p=> p-overallProductPrice)
         filterBasket(()=>{
             const newBasket = basket.filter((el)=>{
                 return el.id !== data.id
@@ -55,13 +57,13 @@ const Product = ({data, finallPrice, filterBasket, basket}) =>{
             <div className="qty-price">
                 <div className="qty">
                     <p>Qty:</p>
-                    <button onClick={down}>-</button>
-                    <input type="string" name="qty" onChange={handleChange} value={qty}/>
-                    <button onClick={up}>+</button>
+                    <button onClick={decreaseQty}>-</button>
+                    <input type="string" name="qty" onChange={handleChangeQty} value={qty}/>
+                    <button onClick={increaseQty}>+</button>
                 </div>
                 <div className="price">
                     {data.price.old_price? <span className="old-price"><s>€{data.price.old_price}</s></span>: null}
-                    <span>€{sumPriceProduct.toFixed(2)}</span>
+                    <span>€{overallProductPrice.toFixed(2)}</span>
                 </div>
             </div>
         </li>

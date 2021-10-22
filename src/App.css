@@ -185,7 +185,6 @@ ul{
   justify-content: space-between;
   align-items: center;
 }
-
 .extra-product button{
   background-color: #5050BA;
   color: #FFFFFF;
@@ -195,24 +194,6 @@ ul{
   font-weight: 400;
   font-size: 12px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* Basket summary */
 .basket-summary {

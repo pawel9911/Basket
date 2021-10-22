@@ -13,7 +13,7 @@ const Main = () =>{
                 <span className="btn-main">CLOSE</span>
             </button>
             <Basket setStatus={isClose}/>
-        </>
+            </>
         )
     }
     else{
