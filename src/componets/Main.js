@@ -10,7 +10,7 @@ const Main = () =>{
         return (
             <>
             <button className="btn" onClick={isClose}>
-                <span className="btn-main">OPEN</span>
+                <span className="btn-main">CLOSE</span>
             </button>
             <Basket setStatus={isClose}/>
         </>

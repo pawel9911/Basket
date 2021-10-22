@@ -1,15 +1,16 @@
 import Product from "./Product";
 import '.././App.css';
 import Summary from "./Summary";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import listProduct from "../listProduct";
+import UpSellsProducts from "./UpSellsProducts";
 
 const Basket = ({setStatus}) =>{
-    const [totalPrice, setPrice] = useState(261);
-    const [offer, setOffer] = useState([
-        {id: 1, name:"T-shirt", size:"M", color:"red", pattern:"floral", oldPrice: 99.95, currentPrice:59.95},
-        {id:2, name:"Dress", size:"L", currentPrice:80.55},
-        {id:3, name:"Backpack", oldPrice:150.95, currentPrice:120.50}]);
-
+    const [offer, setOffer] = useState(listProduct.items);
+    const [totalPrice, setPrice] = useState(0);
+    useEffect(()=>{
+        offer.forEach((element)=> setPrice(p => p+element.qty*element.price.current_price))
+    },[])
     return(
         <div className="basket">
             <div className="basket-title">
@@ -18,7 +19,8 @@ const Basket = ({setStatus}) =>{
             </div>
             <div className="basket-content">
                 <ul>
-                    {offer.map((element)=> <Product key={element.id} data={element} finallPrice={setPrice} finallBasket={setOffer} basket={offer}/>)}
+                    {offer.map((element)=> <Product key={element.id} data={element} finallPrice={setPrice} filterBasket={setOffer} basket={offer}/>)}
+                    <UpSellsProducts/>
                 </ul>
             </div>
             <Summary totalPrice={totalPrice}/>

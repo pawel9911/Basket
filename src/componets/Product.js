@@ -1,27 +1,39 @@
 import { useState } from "react";
 
-const Product = ({data, finallPrice, finallBasket, basket}) =>{
-    const [properties, setProperties] = useState([[data.size, "size"],[data.color, "color"], [data.pattern, "pattern"]])
-    const [qty, setQty] = useState(1);
-    const [sumPriceProduct, setSumPriceProduct] = useState(data.currentPrice)
+const Product = ({data, finallPrice, filterBasket, basket}) =>{
+    const [qty, setQty] = useState(data.qty);
+    const price = data.price.current_price
+    const [sumPriceProduct, setSumPriceProduct] = useState(price*data.qty)
     
     const up = () =>{
         if(qty <10){
             setQty(p => p+1);
-            setSumPriceProduct(p => p+data.currentPrice)
-            finallPrice(p=> p+data.currentPrice)
+            setSumPriceProduct(p => p+price)
+            finallPrice(p=> p+price)
         }
     }
     const down = () =>{
         if(qty >1){
             setQty(p => p-1)
-            setSumPriceProduct(p => p-data.currentPrice)
-            finallPrice(p=> p-data.currentPrice)
+            setSumPriceProduct(p => p-price)
+            finallPrice(p=> p-price)
+        }
+    }
+    const handleChange = (e) =>{
+        const value = Number(e.target.value)
+        if((value<=10)&&(value>=1)||(value=='')){
+            setQty(value)
+            setSumPriceProduct(value*price)
+            finallPrice(p=>p+value*price-qty*price)
+            // poprzednia wartość + ilość wpisana przez użytkownika* cena - ilość poprzednia zapisana w state * cena
+        }
+        else{
+            alert("Wybierz ilość od 1 do 10")
         }
     }
     const removeProduct = () =>{
         finallPrice(p=> p-sumPriceProduct)
-        finallBasket(()=>{
+        filterBasket(()=>{
             const newBasket = basket.filter((el)=>{
                 return el.id !== data.id
             })
@@ -32,10 +44,10 @@ const Product = ({data, finallPrice, finallBasket, basket}) =>{
     return (
         <li className="product">
             <div className="product-description">
-                <img></img>
+                <img src={data.image} alt={data.product_name}/>
                 <div className="description">
-                    <span className="product-name">{data.name}</span>
-                    {properties.map((property, i)=> <p className="product-property" key={i}><span>{property[0]? `${property[1]}:`: null} </span>{property[0]}</p>)}
+                    <span className="product-name">{data.product_name}</span>
+                    {data.product_options.map((option)=> <p className="product-property" key={option.id}><span>{option.name}: </span>{option.value}</p>)}
                 </div>
                 <button className="remove-button" onClick={removeProduct}>X</button>
             </div>
@@ -44,11 +56,11 @@ const Product = ({data, finallPrice, finallBasket, basket}) =>{
                 <div className="qty">
                     <p>Qty:</p>
                     <button onClick={down}>-</button>
-                    <input readOnly value={qty}/>
+                    <input type="string" name="qty" onChange={handleChange} value={qty}/>
                     <button onClick={up}>+</button>
                 </div>
                 <div className="price">
-                    {data.oldPrice? <span className="old-price"><s>€{data.oldPrice}</s></span>: null}
+                    {data.price.old_price? <span className="old-price"><s>€{data.price.old_price}</s></span>: null}
                     <span>€{sumPriceProduct.toFixed(2)}</span>
                 </div>
             </div>

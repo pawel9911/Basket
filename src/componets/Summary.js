@@ -1,15 +1,16 @@
+import listProduct from "../listProduct";
 
 const Summary = ({totalPrice}) =>{
-    const finallPrice = totalPrice+15;
+    const finallPrice = totalPrice+listProduct.shipping;
     return(
         <div className="basket-summary">
             <div className="shipping">
                 <p>Shipping:</p>
-                <p>€15</p>
+                <p>{listProduct.currency+listProduct.shipping}</p>
             </div>
             <div className="order-total">
                 <p>Order Total:</p>
-                <p>€{finallPrice.toFixed(2)}</p>
+                <p>{listProduct.currency+finallPrice.toFixed(2)}</p>
             </div>
             <a href='/' className="btn-summary">Checkout</a>
         </div>
