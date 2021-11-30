@@ -1,4 +1,4 @@
-# Hatimeria
+# Basket
 
 W projekcie wykorzystałem Reacta.js oraz SCSS.
 
